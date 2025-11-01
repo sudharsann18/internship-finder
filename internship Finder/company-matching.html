@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Details</title>
+  <style>
+    body {
+      background-color: #0d001a;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #b27df5;
+      text-shadow: 0 0 10px rgba(178, 125, 245, 0.7);
+    }
+
+    .company-container {
+      width: 80%;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .company-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(178, 125, 245, 0.2);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .company-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .company-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #c28aff;
+      font-size: 24px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .apply-btn {
+      display: block;
+      width: fit-content;
+      margin: 40px auto;
+      background-color: #7326c8;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(178, 125, 245, 0.4);
+    }
+
+    .apply-btn:hover {
+      background-color: #8e3ef0;
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(178, 125, 245, 0.7);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>Company Overview</header>
+
+  <div class="company-container">
+    <div class="company-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_Tesla_Motors.svg" alt="Tesla Logo" class="company-logo">
+      <h2>Tesla</h2>
+      <p><strong>Industry:</strong> Electric Vehicles & Clean Energy</p>
+      <p><strong>Headquarters:</strong> Austin, Texas, USA</p>
+      <p><strong>About:</strong> Tesla designs and manufactures electric vehicles, battery energy storage systems, and solar energy products. The company is known for its innovation and its mission to accelerate the world’s transition to sustainable energy.</p>
+    </div>
+
+    <div class="company-card">
+      <h2>Work Culture</h2>
+      <p>Tesla’s culture emphasizes innovation, speed, and problem-solving. Employees are encouraged to take initiative and work collaboratively across departments to solve complex challenges.</p>
+    </div>
+
+    <div class="company-card">
+      <h2>Job Opportunities</h2>
+      <p>Current openings include roles in AI development, vehicle design, mechanical engineering, data science, and energy management. Tesla offers competitive pay and performance-based growth opportunities.</p>
+    </div>
+
+    <button class="apply-btn" onclick="goToApply()">Apply Now</button>
+  </div>
+
+  <footer>© 2025 TalentMatch</footer>
+
+  <script>
+    // Scroll animation
+    const cards = document.querySelectorAll('.company-card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => observer.observe(card));
+
+    // Redirect to apply page
+    function goToApply() {
+      document.querySelector('.apply-btn').textContent = "Redirecting...";
+      setTimeout(() => {
+        window.location.href = "apply.html";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

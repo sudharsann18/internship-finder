@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Your Skills</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1a0033;
+
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      transition: background 0.5s ease;
+    }
+
+    /* Notification bar */
+    #notification {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #5a0ea5;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: all 0.5s ease;
+      z-index: 1000;
+    }
+
+    #notification:not(.hidden) {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hidden {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    .container {
+      background-color: #7326c8;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 350px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .skill {
+      background-color: #a14af5;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .skill:hover {
+      background-color: #8b33d9;
+
+    }
+
+    .skill.selected {
+      background-color: #4b0082;;
+
+      transform: scale(1.05);
+    }
+
+    #nextBtn {
+      margin-top: 20px;
+      background-color: #8b33d9;
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #nextBtn:hover {
+      background-color: #9a47e0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Notification bar -->
+  <div id="notification" class="hidden">
+    ✅ We have received your application. Please wait while we process it.
+  </div>
+
+  <div class="container">
+    <h2>Select Your Skills</h2>
+    <div class="skills" id="skills">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">Python</div>
+      <div class="skill">Java</div>
+      <div class="skill">C++</div>
+      <div class="skill">React</div>
+      <div class="skill">SQL</div>
+      <div class="skill">Node.js</div>
+    </div>
+    <button id="nextBtn">Find Internships</button>
+  </div>
+
+  <script>
+    const skills = document.querySelectorAll('.skill');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Toggle skill selection
+    skills.forEach(skill => {
+      skill.addEventListener('click', () => {
+        skill.classList.toggle('selected');
+      });
+    });
+
+    // Go to next page if skills selected
+    nextBtn.addEventListener('click', () => {
+      const selected = document.querySelectorAll('.skill.selected');
+      if (selected.length === 0) {
+        alert('Please select at least one skill.');
+      } else {
+        document.body.classList.remove("loaded");
+        setTimeout(() => {
+          window.location.href = 'matching.html';
+        }, 500);
+      }
+    });
+
+    // Show notification if redirected from apply.html
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("submitted") === "true") {
+      const bar = document.getElementById("notification");
+      bar.classList.remove("hidden");
+      setTimeout(() => {
+        bar.classList.add("hidden");
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
